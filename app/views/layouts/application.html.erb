@@ -5,8 +5,8 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title><%= controller.controller_name %>: <%= controller.action_name %></title>
-  <%= stylesheet_link_tag 'scaffold' %>
-  <%= javascript_include_tag :defaults %>
+  <%= stylesheet_link_tag 'scaffold', '../javascripts/facebox/facebox' %>
+  <%= javascript_include_tag 'jquery-1.3.2.min', 'facebox/facebox', 'application' %>
 </head>
 <body>
 
