@@ -3,7 +3,7 @@ $(document).ready(function(){
   $.facebox.settings.closeImage = '/javascripts/facebox/closelabel.gif';
 
   $('a[rel*=facebox]').click(function(){
-    var me = $(this);
+    var me = this;
     $.facebox(function(){
       $.get(me.href,
             null,
