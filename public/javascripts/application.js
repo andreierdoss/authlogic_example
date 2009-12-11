@@ -4,6 +4,9 @@ var MyApp = (function($){
 
   $().ajaxError(function(event, xhr, settings, error) {
     switch(xhr.status) {
+      case 401:
+        MyApp.renderLoginForm();
+        break;
       case 406:
         $('#errorExplanation').remove();
         $('#facebox form').prepend('<div id="errorExplanation" class="errorExplanation">\
@@ -15,7 +18,21 @@ var MyApp = (function($){
   });
 
   $(document).ready(function(){
-    $('a[rel*=facebox]').facebox();
+    $('a[rel*=facebox]').click(function() {
+      var me = this;
+      $.facebox(function() {
+        $.ajax({
+          url: me.href,
+          type: 'GET',
+          success: function(data) { $.facebox(data); },
+          error: function(xhr) {
+            MyApp.$clickback = $(me);
+          }
+        });
+      });
+      return false;
+    });
+
     $('a[href=/user_session/new]').click(function(){
       MyApp.renderLoginForm();
       return false;
@@ -43,7 +60,13 @@ var MyApp = (function($){
           url: $(this).attr('action'),
           data: $(this).serialize(),
           dataType: 'html',
-          success: function(data) { window.location = '/account'; },
+          success: function(data) {
+            if(MyApp.$clickback) {
+              MyApp.$clickback.click();
+            } else {
+              window.location = '/account';
+            }
+          },
           error: function(xhr) {}
         });
         return false;
