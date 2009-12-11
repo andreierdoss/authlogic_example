@@ -10,8 +10,13 @@ class UserSessionsController < ApplicationController
   def create
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
-      flash[:notice] = "Login successful!"
-      redirect_back_or_default account_url
+      notice = 'Login successful!'
+      if request.xhr?
+        render :text => notice
+      else
+        flash[:notice] = notice
+        redirect_back_or_default account_url
+      end
     else
       if request.xhr?
         render :text => 'Invalid login/password combination', :status => 406
