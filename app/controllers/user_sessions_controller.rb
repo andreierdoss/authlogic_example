@@ -8,6 +8,7 @@ class UserSessionsController < ApplicationController
   end
   
   def create
+    sleep 5
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
       notice = 'Login successful!'
