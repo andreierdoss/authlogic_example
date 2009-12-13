@@ -20,6 +20,7 @@ var MyApp = (function($){
 
   $(document).ready(function(){
     MyApp.ajaxifyLink('a[rel*=facebox]');
+    MyApp.ajaxifyForm('form[rel*=facebox]');
 
     $('a[href=/user_session/new]').click(function(){
       MyApp.renderLoginForm();
@@ -80,7 +81,7 @@ var MyApp = (function($){
           url: me.attr('action'),
           data: me.serialize(),
           dataType: 'html',
-          beforeSend: function() { me.append(formSpinner).show(); me.find('input[type=submit]').attr('disabled','disabled'); },
+          beforeSend: function() { me.find('input[type=submit]').after(formSpinner); me.find('input[type=submit]').attr('disabled','disabled'); },
           complete: function() { me.find('.spinner').remove(); me.find('input[type=submit]').removeAttr('disabled'); },
           success: function(data) {$.facebox(data);},
           error: function(xhr) { if(xhr.status == 401) MyApp.$submitback = me; }

@@ -1,1 +1,12 @@
 <%= link_to "Secret Data", {:controller => :home, :action => :secret}, :rel => 'facebox' %>
+<br />
+<br />
+<% form_tag url_for(:controller => :home, :action => :secret), :rel => 'facebox' do %>
+  <fieldset>
+    <%= label_tag :spy_name %>
+    <%= text_field_tag :spy_name %>
+    <br />
+    <br />
+    <%= submit_tag 'Get Orders' %>
+  </fieldset>
+<% end %>

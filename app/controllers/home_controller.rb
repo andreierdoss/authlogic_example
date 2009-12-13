@@ -3,6 +3,10 @@ class HomeController < ApplicationController
 
   def secret
     sleep 2
-    render :text => "Food flies to those who would have it flown to those they despise"
+    if request.get?
+      render :text => "Food flies to those who would have it flown to those they despise"
+    else
+      render :text => "Be seeing you, #{params[:spy_name]}"
+    end
   end
 end
