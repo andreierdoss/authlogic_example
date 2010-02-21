@@ -10,3 +10,16 @@
     <%= submit_tag 'Get Orders' %>
   </fieldset>
 <% end %>
+<br />
+Ajax Form
+<% form_tag url_for(:controller => :home, :action => :ajax_secret), :id => "ajax_form" do %>
+  <fieldset>
+    <%= label_tag :spy_name %>
+    <%= text_field_tag :spy_name %>
+    <br />
+    <br />
+    <%= submit_tag 'Get Spy' %>
+  </fieldset>
+<% end %>
+
+<div id="orders"></div>

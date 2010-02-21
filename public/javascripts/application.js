@@ -1,3 +1,19 @@
+jQuery.ajaxSetup({ 
+  'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
+});
+
+jQuery.fn.submitWithAjax = function() {
+  this.submit(function() {
+    $.post(this.action, $(this).serialize(), null, "script");
+    return false;
+  })
+  return this;
+};
+
+$(document).ready(function() {
+  $("#ajax_form").submitWithAjax();
+});
+
 var MyApp = (function($){
   $.facebox.settings.loadingImage = '/javascripts/facebox/loading.gif';
   $.facebox.settings.closeImage = '/javascripts/facebox/closelabel.gif';
